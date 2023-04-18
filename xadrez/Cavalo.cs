@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,9 @@ using Xadrez.Tabuleiro;
 
 namespace Xadrez.xadrez
 {
-    internal class Rei : Peca
+    internal class Cavalo : Peca
     {
-
-        //construtor
-        public Rei(tabuleiro tab, Cor cor) : base(tab, cor)
+        public Cavalo(tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
@@ -28,57 +27,57 @@ namespace Xadrez.xadrez
 
             Position pos = new Position(0, 0);
 
-            //acima
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna);
+            //1
+            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna - 2);
+            if(Tab.PosicaoValida(pos) && PodeMover(pos))
+            {
+                Mat[pos.Linha, pos.Coluna] = true;
+            }
+
+            //2
+            pos.DefinirValores(posicao.Linha - 2, posicao.Coluna - 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //nordeste
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna + 1);
+            //3
+            pos.DefinirValores(posicao.Linha - 2, posicao.Coluna + 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //direita
-            pos.DefinirValores(posicao.Linha, posicao.Coluna + 1);
+            //4
+            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna + 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //sudeste
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna + 1);
+            //5
+            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna + 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //abaixo
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna);
+            //6
+            pos.DefinirValores(posicao.Linha + 2, posicao.Coluna + 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //sudoeste
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna - 1);
+            //7
+            pos.DefinirValores(posicao.Linha + 2, posicao.Coluna - 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //esqueda
-            pos.DefinirValores(posicao.Linha, posicao.Coluna - 1);
-            if (Tab.PosicaoValida(pos) && PodeMover(pos))
-            {
-                Mat[pos.Linha, pos.Coluna] = true;
-            }
-
-            //noroeste
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna - 1);
+            //8
+            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna - 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 Mat[pos.Linha, pos.Coluna] = true;
@@ -91,7 +90,7 @@ namespace Xadrez.xadrez
         //when log the class, will return R;
         public override string ToString()
         {
-            return "R";
+            return "C";
         }
     }
 }

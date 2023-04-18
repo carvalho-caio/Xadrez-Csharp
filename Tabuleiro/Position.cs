@@ -25,6 +25,13 @@ namespace Tabuleiro
 
         //methods
 
+        public void DefinirValores(int linha, int coluna)
+        {
+            this.Linha = linha;
+            this.Coluna = coluna;
+        }
+
+
         //to string
         public override string ToString()
         {

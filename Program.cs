@@ -1,7 +1,9 @@
 ﻿using System;
 using Tabuleiro;
+using xadrez;
 using Xadrez.Tabuleiro;
 using Xadrez.xadrez;
+using System.Collections.Generic;
 
 namespace Xadrez
 {
@@ -9,20 +11,56 @@ namespace Xadrez
     {
         static void Main(string[] args)
         {
-            tabuleiro tab = new tabuleiro(8, 8);
+            PartidaDeXadrez Partida = new PartidaDeXadrez();
 
-            //colocando peças;
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Position(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Position(1, 3));
-            tab.ColocarPeca(new Rei(tab, Cor.Preta), new Position(2, 4));
+            while (!Partida.Terminada)
+            {
 
-            Tela.ImprimirTabuleiro(tab);
+                try
+                {
 
-            //to declar a CHAR variable, it NEEDS to be in simple ', otherwise is considered a string;
-            PosicaoXadrez teste = new PosicaoXadrez('c', 7);
+                    Console.Clear();
 
-            Console.WriteLine(teste.ToPosicao());
-            Console.WriteLine(teste);
+                    Tela.ImprimirPartida(Partida);
+
+                    Console.WriteLine("");
+                    Console.Write("Origem: ");
+                    Position Origem = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    //validando posicao de origem
+                    Partida.ValidarPosicaoDeOrigem(Origem);
+
+                    //showing possible path to the piece;
+                    bool[,] PosicoesPossiveis = Partida.Tab.peca(Origem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(Partida.Tab, PosicoesPossiveis);
+
+                    //logic ends here;
+
+                    Console.WriteLine("");
+                    Console.Write("Destino: ");
+                    Position Destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    //validando posicao de destino;
+                    Partida.ValidarPosicaoDeDestino(Origem, Destino);
+
+
+                    //executando movimento;
+                    Partida.ExecutaMovimento(Origem, Destino);
+
+                    //colocando peças;
+                    Tela.ImprimirTabuleiro(Partida.Tab);
+                }
+                catch (TabuleiroException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
+            Console.Clear();
+
+            Tela.ImprimirPartida(Partida);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tabuleiro;
+using Xadrez.xadrez;
 
 namespace Xadrez.Tabuleiro
 {
@@ -47,6 +48,19 @@ namespace Xadrez.Tabuleiro
             Pecas[pos.Linha, pos.Coluna] = p;
 
             p.posicao = pos;
+        }
+
+        public Peca RetirarPeca(Position pos)
+        {
+            if(peca(pos) == null)
+            {
+                return null;
+            }
+
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            Pecas[pos.Linha, pos.Coluna] = null;
+            return aux;
         }
 
         public bool PosicaoValida(Position pos)
