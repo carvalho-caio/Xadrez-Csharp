@@ -1,41 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tabuleiro
+﻿namespace tabuleiro
 {
-    internal class Position
+    class Posicao
     {
-        public int Linha { get; set; }
-        public int Coluna { get; set; }
 
-        //constructors
-        public Position()
+        public int linha { get; set; }
+        public int coluna { get; set; }
+
+        public Posicao(int linha, int coluna)
         {
-
+            this.linha = linha;
+            this.coluna = coluna;
         }
 
-        public Position(int linha, int coluna)
+        public void definirValores(int linha, int coluna)
         {
-            Linha = linha;
-            Coluna = coluna;
+            this.linha = linha;
+            this.coluna = coluna;
         }
 
-        //methods
-
-        public void DefinirValores(int linha, int coluna)
-        {
-            this.Linha = linha;
-            this.Coluna = coluna;
-        }
-
-
-        //to string
         public override string ToString()
         {
-            return Linha + ", " + Coluna;
+            return linha
+                + ", "
+                + coluna;
         }
     }
 }

@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tabuleiro;
+﻿using tabuleiro;
 
-namespace Xadrez.xadrez
+namespace xadrez
 {
-    internal class PosicaoXadrez
+    class PosicaoXadrez
     {
-        public char Coluna { get; set; }
-        public int Linha { get; set; }
 
-        //constructor
+        public char coluna { get; set; }
+        public int linha { get; set; }
+
         public PosicaoXadrez(char coluna, int linha)
         {
-            Coluna = coluna;
-            Linha = linha;
+            this.coluna = coluna;
+            this.linha = linha;
         }
 
-        //method that returns a numeric value from the chess position (ex: turns C7 into 1, 2);
-        public Position ToPosicao()
+        public Posicao toPosicao()
         {
-            return new Position(8 - Linha, Coluna - 'a');
+            return new Posicao(8 - linha, coluna - 'a');
         }
 
         public override string ToString()
         {
-            //as aspas vazias são para forçar uma conversão a string;
-            return "" + (char.ToUpper(Coluna)) + Linha;
+            return "" + coluna + linha;
         }
     }
 }

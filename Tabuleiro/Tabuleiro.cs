@@ -1,85 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tabuleiro;
-using Xadrez.xadrez;
-
-namespace Xadrez.Tabuleiro
+﻿namespace tabuleiro
 {
-    internal class tabuleiro
+    class Tabuleiro
     {
-        public int Linha { get; set; }
-        public int Colunas { get; set; }
-        private Peca[,] Pecas;
 
-        public tabuleiro(int linha, int coluna)
+        public int linhas { get; set; }
+        public int colunas { get; set; }
+        private Peca[,] pecas;
+
+        public Tabuleiro(int linhas, int colunas)
         {
-            Linha = linha;
-            Colunas = coluna;
-            Pecas = new Peca[linha, coluna];
-        }
-        
-        public Peca peca (int linha, int coluna)
-        {
-            return Pecas[linha, coluna];
+            this.linhas = linhas;
+            this.colunas = colunas;
+            pecas = new Peca[linhas, colunas];
         }
 
-        //sobrecarga;
-        public Peca peca(Position pos)
+        public Peca peca(int linha, int coluna)
         {
-            return Pecas[pos.Linha, pos.Coluna];
+            return pecas[linha, coluna];
         }
 
-        public bool ExistePeca (Position pos)
+        public Peca peca(Posicao pos)
         {
-            ValidarPosicao(pos);
+            return pecas[pos.linha, pos.coluna];
+        }
+
+        public bool existePeca(Posicao pos)
+        {
+            validarPosicao(pos);
             return peca(pos) != null;
         }
 
-        public void ColocarPeca (Peca p, Position pos)
+        public void colocarPeca(Peca p, Posicao pos)
         {
-            //teste para ver se já tem uma peça no local em que a peça vai ser colocada, se tiver, joga um erro;
-            if (ExistePeca(pos))
+            if (existePeca(pos))
             {
-                throw new TabuleiroException("Já existe uma peca nessa posicao.");
+                throw new TabuleiroException("Já existe uma peça nessa posição!");
             }
-            Pecas[pos.Linha, pos.Coluna] = p;
-
+            pecas[pos.linha, pos.coluna] = p;
             p.posicao = pos;
         }
 
-        public Peca RetirarPeca(Position pos)
+        public Peca retirarPeca(Posicao pos)
         {
-            if(peca(pos) == null)
+            if (peca(pos) == null)
             {
                 return null;
             }
-
             Peca aux = peca(pos);
             aux.posicao = null;
-            Pecas[pos.Linha, pos.Coluna] = null;
+            pecas[pos.linha, pos.coluna] = null;
             return aux;
         }
 
-        public bool PosicaoValida(Position pos)
+        public bool posicaoValida(Posicao pos)
         {
-            if(pos.Linha < 0 || pos.Linha >= Linha || pos.Coluna < 0 || pos.Coluna >= Colunas)
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
-        public void ValidarPosicao(Position pos)
+        public void validarPosicao(Posicao pos)
         {
-            if(!PosicaoValida(pos))
+            if (!posicaoValida(pos))
             {
-                throw new TabuleiroException("Invalid position!");
+                throw new TabuleiroException("Posição inválida!");
             }
         }
     }

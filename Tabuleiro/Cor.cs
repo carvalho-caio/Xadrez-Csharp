@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Xadrez.Tabuleiro
+﻿namespace tabuleiro
 {
-    internal enum Cor
+    enum Cor
     {
+
         Branca,
         Preta,
         Amarela,
         Azul,
-        Vermelha
+        Vermelha,
+        Verde,
+        Laranja
     }
 }
